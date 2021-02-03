@@ -1,0 +1,126 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Abel De Jesús Pimentel</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-12">
+      <div class="card">
+        <h5 class="card-header">Agregar usuario</h5>
+        <div class="card-body">
+          <form (ngSubmit)="guardar()" [formGroup]="forma">
+            <div class="row mb-3">
+              <div class="col">
+                <label class="form-label">Nombres</label>
+                <input type="text" 
+                      class="form-control"
+                      formControlName="nombres">
+              </div>
+              <div class="col">
+                <label class="form-label">Apellidos</label>
+                <input type="text" 
+                      class="form-control"
+                      formControlName="apellidos">
+              </div>
+              <div class="col">
+                <label class="form-label">Cédula</label>
+                <input type="text" 
+                      class="form-control"
+                      formControlName="cedula"
+                      [imask]="{mask: '000-0000000-0'}" 
+                      [unmask]="true">
+              </div>
+            </div>
+          
+            <div class="row mb-3">
+              <div class="col">
+                <label class="form-label">Género</label>
+                <select class="form-select" formControlName="genero">
+                  <option value="">Eliga una opción</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                </select>
+              </div>
+              <div class="col">
+                <label class="form-label">Fecha nacimiento</label>
+                <input type="date" 
+                       class="form-control"
+                       formControlName="fecha_nacimiento">
+
+              </div>
+              <div class="col">
+                <label class="form-label">Departamento</label>
+                <select class="form-select" formControlName="departamento">
+                  <option value="">Eliga una opción</option>
+                  <option *ngFor="let item of departamentos" value="{{ item.codigo }}">{{ item.nombre }}</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col">
+                <label class="form-label">Cargo</label>
+                <input type="text" 
+                       class="form-control"
+                       formControlName="cargo">
+
+              </div>
+              <div class="col">
+                <label class="form-label">Supervisor inmediato</label>
+                <input type="text" 
+                       class="form-control"
+                       formControlName="supervisor_inmediato">
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Cédula</th>
+            <th>Género</th>
+            <th>Fecha nacimiento</th>
+            <th>Departamento</th>
+            <th>Cargo</th>
+            <th>Supervisor inmediato</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios">
+            <th>{{ usuario.id }}</th>
+            <td>{{ usuario.nombres }}</td>
+            <td>{{ usuario.apellidos }}</td>
+            <td>{{ usuario.cedula }}</td>
+            <th>{{ usuario.genero == 'M' ? 'Masculino' : 'Femenino' }}</th>
+            <td>{{ usuario.fecha_nacimiento | date:'dd/MM/yyyy'}}</td>
+            <td>{{ usuario.departamento }}</td>
+            <td>{{ usuario.cargo }}</td>
+            <td>{{ usuario.supervisor_inmediato }}</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
